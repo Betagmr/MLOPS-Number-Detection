@@ -18,9 +18,3 @@ def process_data(data_path: Path) -> tuple[np.ndarray[Any, Any], np.ndarray[Any,
     out_y = one_hot(torch.tensor(raw.label), num_classes=10).numpy()
 
     return out_x, out_y
-
-
-if __name__ == "__main__":
-    out_x, out_y = process_data(data_path=Path("data/train.csv"))
-
-    print("Number of elements in test", len(out_y))

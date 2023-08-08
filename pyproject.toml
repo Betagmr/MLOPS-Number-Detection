@@ -1,0 +1,54 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "Number_detection"
+readme = "README.md"
+version = "0.0.1"
+requires-python = ">=3.11"
+dependencies = [
+    "clearml",
+    "numpy",
+    "pandas",
+    "matplotlib",
+    "torch",
+    "lightning",
+    "scikit-learn", 
+    "tensorboard",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "black", "ruff", "isort", "mypy", "pre-commit"]
+
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"
+
+[tool.ruff]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "C",  # flake8-comprehensions
+    "B",  # flake8-bugbear
+]
+ignore = [
+    "E501", # line too long
+    "C901", # Too complex 
+]
+exclude = ["__init__.py"]
+
+[tool.mypy]
+check_untyped_defs = true
+disallow_any_generics = true
+disallow_incomplete_defs = true
+disallow_untyped_defs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "test", "."]

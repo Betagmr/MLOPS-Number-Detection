@@ -64,8 +64,8 @@ class LitModel(pl.LightningModule):
         self.test_targets.append(y.argmax(dim=1).cpu())
 
     def on_test_epoch_end(self) -> None:
-        predictions = torch.cat([tmp for tmp in self.test_outputs])
-        targets = torch.cat([tmp for tmp in self.test_targets])
+        predictions = torch.cat(list(self.test_outputs))
+        targets = torch.cat(list(self.test_targets))
 
         ConfusionMatrixDisplay.from_predictions(targets, predictions)
         plt.show()

@@ -10,7 +10,7 @@ def update_dataset(dataset_name: str) -> None:
     data_path = Path(dataset_manager.get_local_copy()) / "train.csv"
     train_df = pd.read_csv(data_path)
 
-    labels = list(str(i) for i in range(10))
+    labels = [str(i) for i in range(10)]
     values = [[element] for element in train_df.label.value_counts().sort_index().values]
 
     dataset_manager.get_logger().report_histogram(

@@ -17,7 +17,7 @@ class LitModel(pl.LightningModule):
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=(2, 2)),
             nn.Flatten(),
-            nn.Linear(in_features=7840, out_features=128),
+            nn.Linear(in_features=40 * 14 * 14, out_features=128),
             nn.ReLU(),
             nn.Linear(in_features=128, out_features=10),
             nn.Softmax(dim=1),
@@ -52,8 +52,8 @@ class LitModel(pl.LightningModule):
         x, y = batch
         y_predicted = self.forward(x)
 
-        if batch_idx % 50 == 0:
-            self.logger.experiment.add_images(  # type: ignore
+        if batch_idx % 50 == 0 and self.logger is not None:
+            self.logger.experiment.add_images(
                 f"{y_predicted.argmax(dim=1).tolist()[:5]}",
                 x[:5],
             )

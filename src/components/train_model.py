@@ -36,9 +36,4 @@ def train_model(
     dataloader = DataLoader(dataset, batch_size=32, num_workers=4)
     trainer.fit(model, dataloader)
 
-    # Report the model to ClearML
-    model_path = Path().cwd() / "model.pt"
-    torch.save(model.state_dict(), model_path)
-    os.remove(model_path)
-
     return model

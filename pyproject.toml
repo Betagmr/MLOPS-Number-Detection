@@ -13,6 +13,7 @@ dependencies = [
     "pandas",
     "matplotlib",
     "torch",
+    "torchvision",
     "lightning",
     "scikit-learn", 
     "tensorboard",
@@ -20,6 +21,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest", "black", "ruff", "isort", "mypy", "pre-commit"]
+client = ["streamlit", "streamlit-drawable-canvas"]
 
 [tool.black]
 line-length = 120

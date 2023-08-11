@@ -21,8 +21,6 @@ def get_model() -> list[torch.nn.Module]:
         model_path = model.get_local_copy()
         model_list.append(torch.jit.load(model_path))
 
-    print(len(model_list))
-
     return model_list
 
 
@@ -69,7 +67,6 @@ def main() -> None:
 
         if st.button("Predict"):
             result = make_prediction(image_array)
-            # Show the result
             st.text(result)
 
 

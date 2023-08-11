@@ -7,7 +7,7 @@ import torch
 from torch.nn.functional import one_hot
 
 
-def process_data(data_path: Path) -> tuple[np.ndarray[Any, Any], np.ndarray[Any, Any]]:
+def process_data(data_path: Path | str) -> tuple[np.ndarray[Any, Any], np.ndarray[Any, Any]]:
     raw: pd.DataFrame = pd.read_csv(data_path)
 
     num_images = raw.shape[0]

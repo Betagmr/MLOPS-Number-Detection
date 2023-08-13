@@ -18,6 +18,6 @@ def data_augmentation(
         ]
     )
 
-    x_data = augmentation(torch.from_numpy(x_data))
+    x_augmented = [augmentation(element) for element in torch.from_numpy(x_data)]
 
-    return np.array(x_data), y_data
+    return np.array(x_augmented), y_data

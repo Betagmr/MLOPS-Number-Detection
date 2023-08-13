@@ -6,3 +6,6 @@ train:
 
 augment:
 	python3 -m src.pipe.augment_dataset
+
+runclient:
+	streamlit run client/app.py

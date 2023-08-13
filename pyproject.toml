@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "Number_detection"
 readme = "README.md"
 version = "0.0.1"
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 dependencies = [
     "clearml",
     "numpy",
@@ -21,7 +21,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest", "black", "ruff", "isort", "mypy", "pre-commit"]
-client = ["streamlit", "streamlit-drawable-canvas"]
+client = ["streamlit", "streamlit-drawable-canvas", "opencv-python"]
 
 [tool.black]
 line-length = 120

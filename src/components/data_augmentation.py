@@ -9,7 +9,7 @@ def data_augmentation(
     x_data: np.ndarray[Any, Any],
     y_data: np.ndarray[Any, Any],
     translate: tuple[float, float] = (0.2, 0.25),
-    scale: tuple[float, float] = (0.55, 0.77),
+    scale: tuple[float, float] = (0.50, 0.75),
 ) -> tuple[np.ndarray[Any, Any], np.ndarray[Any, Any]]:
     augmentation = T.Compose(
         [

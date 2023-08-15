@@ -10,7 +10,7 @@ from clearml import Model
 from streamlit_drawable_canvas import st_canvas
 
 
-def get_model() -> list[torch.nn.Module]:
+def get_model() -> list[tuple[torch.nn.Module, str]]:
     my_models = Model.query_models(
         project_name="Number_detection",
         tags=["production"],
@@ -19,20 +19,20 @@ def get_model() -> list[torch.nn.Module]:
     model_list = []
     for model in my_models:
         model_path = model.get_local_copy()
-        model_list.append(torch.jit.load(model_path))
+        model_list.append((torch.jit.load(model_path), model.id))
 
     return model_list
 
 
-def make_prediction(image: np.ndarray[Any, Any]) -> list[int]:
+def make_prediction(image: np.ndarray[Any, Any]) -> list[str]:
     model_list = get_model()
     tensor = torch.tensor(np.array([image])).float()
 
     result_list = []
-    for model in model_list:
+    for model, id in model_list:
         result = model(tensor).tolist()
         value = np.argmax(result, axis=1)[0]
-        result_list.append(value)
+        result_list.append(f"{value} - {id}")
 
     return result_list
 

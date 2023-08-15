@@ -54,7 +54,7 @@ class LitModel(pl.LightningModule):
 
         if batch_idx % 50 == 0 and self.logger is not None:
             self.logger.experiment.add_images(
-                f"{y_predicted.argmax(dim=1).tolist()[:5]}",
+                f"{y_predicted.argmax(dim=1).tolist()[:5]} | {batch_idx}",
                 x[:5],
             )
 

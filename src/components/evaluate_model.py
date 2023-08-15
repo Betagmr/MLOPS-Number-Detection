@@ -16,6 +16,6 @@ def evaluate_model(
     tensor_board = TensorBoardLogger("lightning_logs", name="my_model")
     dataset = CustomDataset(x_test, y_test)
     trainer = pl.Trainer(max_epochs=2, accelerator="cuda", logger=tensor_board)
-    dataloader = DataLoader(dataset, batch_size=32, num_workers=4)
+    dataloader = DataLoader(dataset, batch_size=128, num_workers=4, shuffle=True)
 
     trainer.test(model, dataloader)

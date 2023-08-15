@@ -20,4 +20,4 @@ def data_augmentation(
 
     x_augmented = [augmentation(element) for element in torch.from_numpy(x_data)]
 
-    return np.array(x_augmented), y_data
+    return (255 * np.array(x_augmented)).astype(int), y_data

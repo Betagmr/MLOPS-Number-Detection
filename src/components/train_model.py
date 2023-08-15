@@ -30,7 +30,7 @@ def train_model(
     # Train the model
     model = LitModel(lr=params["lr"])
     dataset = CustomDataset(x_train, y_train)
-    dataloader = DataLoader(dataset, batch_size=32, num_workers=4)
+    dataloader = DataLoader(dataset, batch_size=128, num_workers=4, shuffle=True)
     trainer.fit(model, dataloader)
 
     return model

@@ -5,7 +5,7 @@ from clearml import Dataset
 
 
 def update_dataset(dataset_name: str) -> None:
-    dataset_manager = Dataset.get(dataset_name=dataset_name, alias=dataset_name)
+    dataset_manager = Dataset.get(dataset_name=dataset_name, alias=f"{dataset_name}_uploaded")
 
     data_path = Path(dataset_manager.get_local_copy()) / "train.csv"
     train_df = pd.read_csv(data_path)

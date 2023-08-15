@@ -12,7 +12,7 @@ class TrainingParams(TypedDict):
 
 TRAINING_PARAMS: TrainingParams = {
     "lr": 1e-3,
-    "batch_size": 32,
+    "batch_size": 128,
     "n_epochs": 5,
     "seed": 42,
     "device": "cuda",

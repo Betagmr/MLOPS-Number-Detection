@@ -1,24 +1,24 @@
-from clearml import PipelineDecorator
+from clearml import Dataset, PipelineDecorator
 
 from src.settings import metadata
 from src.utils.types import np_array
 
 
-@PipelineDecorator.component(return_values=["data_path"])
-def s1_download_dataset(dataset_id: str) -> str:
+@PipelineDecorator.component(return_values=["data_path", "parent_id"])
+def s1_download_dataset(dataset_id: str) -> tuple[str, str]:
     from src.components.download_dataset import download_dataset
 
     return download_dataset(dataset_id)
 
 
-@PipelineDecorator.component(return_values=["x_data", "y_data"], cache=True)
+@PipelineDecorator.component(return_values=["x_data", "y_data"])
 def s2_process_data(data_path: str) -> tuple[np_array, np_array]:
     from src.components.process_data import process_data
 
     return process_data(f"{data_path}/train.csv")
 
 
-@PipelineDecorator.component(return_values=["x_augmented", "y_augmented"], cache=True)
+@PipelineDecorator.component(return_values=["x_augmented", "y_augmented"])
 def s3_augment_data(x_data: np_array, y_data: np_array, n_samples: int) -> tuple[list[np_array], list[np_array]]:
     from src.components.data_augmentation import data_augmentation
 
@@ -83,10 +83,10 @@ def s5_create_new_dataset(dataset_name: str, resource_path: str) -> None:
     args_map={"General": ["dataset_id"]},
 )
 def run_pipeline(dataset_id: str) -> None:
-    data_path = s1_download_dataset(dataset_id=dataset_id)
+    data_path, _ = s1_download_dataset(dataset_id=dataset_id)
     x_data, y_data = s2_process_data(data_path=data_path)
     x_augmented, y_augmented = s3_augment_data(x_data=x_data, y_data=y_data, n_samples=2)
-    filepath = s4_save_to_csv(x_augmented, y_augmented, data_path)
+    filepath = s4_save_to_csv(x_data=x_augmented, y_data=y_augmented, path=data_path)
     s5_create_new_dataset(dataset_name=dataset_id, resource_path=filepath)
 
     print(f"Augmented dataset saved to {filepath}")

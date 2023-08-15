@@ -28,7 +28,7 @@ def start_training(create_task: bool = False) -> None:
     set_seed(TRAINING_PARAMS["seed"])
 
     logger.info("Downloading data")
-    data_path = download_dataset("digit_dataset")
+    data_path, _ = download_dataset("digit_dataset")
 
     logger.info("Processing data")
     train_path = Path(data_path) / "train.csv"

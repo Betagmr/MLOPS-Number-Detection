@@ -10,7 +10,7 @@ def download_dataset(dataset_name: str, mut_copy: bool = False) -> tuple[str, st
                 target_folder="./data",
                 overwrite=True,
             ),
-            dataset_manager,
+            dataset_manager.id,
         )
 
     return dataset_manager.get_local_copy(), dataset_manager.id

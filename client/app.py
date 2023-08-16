@@ -12,7 +12,7 @@ from streamlit_drawable_canvas import st_canvas
 
 def get_model() -> list[tuple[torch.nn.Module, str]]:
     my_models = Model.query_models(
-        project_name="Number_detection",
+        project_name="Number_detection/canary_training",
         tags=["production"],
     )
 

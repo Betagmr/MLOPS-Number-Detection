@@ -14,16 +14,15 @@ from src.utils.logger import logger
 from src.utils.set_seed import set_seed
 
 
-def start_training(create_task: bool = False) -> None:
+def start_training() -> None:
     logger.info("Starting training")
-    if create_task:
-        task: Task = Task.init(
-            project_name=metadata.PROJECT_NAME,
-            task_name="Model training",
-            output_uri=True,
-        )
+    task: Task = Task.init(
+        project_name=f"{metadata.PROJECT_NAME}/canary_training",
+        task_name="Model training",
+        output_uri=True,
+    )
 
-        task.connect(TRAINING_PARAMS, "training_params")
+    task.connect(TRAINING_PARAMS, "training_params")
 
     set_seed(TRAINING_PARAMS["seed"])
 
@@ -48,4 +47,4 @@ def start_training(create_task: bool = False) -> None:
 
 
 if __name__ == "__main__":
-    start_training(True)
+    start_training()

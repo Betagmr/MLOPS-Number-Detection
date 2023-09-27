@@ -54,3 +54,6 @@ ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 pythonpath = ["src", "test", "."]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]

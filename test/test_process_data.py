@@ -54,6 +54,7 @@ def test_load_data(sample_data: tuple[np_array, np_array], data_path: Path) -> N
     x_data, y_data = process_data(data_path)
 
     assert x_data[:, 0, 0, 0].tolist() == [0, 1, 15 / 255]
+    assert x_data.shape == (3, 1, 28, 28)
 
     assert y_data.tolist()[0] == [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     assert y_data.tolist()[1] == [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
